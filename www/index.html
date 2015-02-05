@@ -5,10 +5,14 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <link href="./css/ionic.css" rel="stylesheet">
+    <link href="./css/ionic.min.css" rel="stylesheet">
 
-    <!-- ionic/angularjs js -->
-    <script src="./lib/ionic.bundle.js"></script>
+    <script src="./lib/angular.js"></script>
+    <script src="./lib/angular-animate.js"></script>
+    <script src="./lib/angular-sanitize.js"></script>
+    <script src="./lib/angular-ui-router.js"></script>
+    <script src="./lib/ionic.js"></script>
+    <script src="./lib/ionic-angular.js"></script>
     <script src="./lib/firebase.js"></script>
     <script src="./lib/angularfire.min.js"></script>
 
@@ -16,6 +20,7 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
+    <script src="./wsp.js"></script>
     <script src="./app.js"></script>
   </head>
   <body ng-app="starter">
@@ -25,6 +30,15 @@
         <h1 class="title">Starter</h1>
       </ion-header-bar>
       <ion-content>
+        <div ng-controller="FireController">
+          <span ng-bind="welcomeMsg"></span>
+          <form>
+            <input type="email" placeholder="email" ng-model="acc.lgn" />
+            <input type="password" placeholder="password" ng-model="acc.pwd" />
+            <button class="button" ng-click="login(acc)">login()</button>  
+          </form>
+        </div>
+        
       </ion-content>
     </ion-pane>
   </body>
