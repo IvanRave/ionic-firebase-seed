@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
 
-    <link href="./css/ionic.min.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
 
-    <script src="./lib/angular.js"></script>
-    <script src="./lib/angular-animate.js"></script>
-    <script src="./lib/angular-sanitize.js"></script>
-    <script src="./lib/angular-ui-router.js"></script>
-    <script src="./lib/ionic.js"></script>
-    <script src="./lib/ionic-angular.js"></script>
-    <script src="./lib/firebase.js"></script>
-    <script src="./lib/angularfire.min.js"></script>
+  <link href="./css/ionic.min.css" rel="stylesheet">
+</head>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+<body ng-app="starter">
 
-    <!-- your app's js -->
-    <script src="./wsp.js"></script>
-    <script src="./app.js"></script>
-  </head>
-  <body ng-app="starter">
+  <ion-pane>
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Starter</h1>
+    </ion-header-bar>
+    <ion-content>
+      <div ng-controller="FireController">
+        <span ng-bind="welcomeMsg"></span>
+        <form>
+          <input type="email" placeholder="email" ng-model="acc.lgn" />
+          <input type="password" placeholder="password" ng-model="acc.pwd" />
+          <button class="button" ng-click="login(acc)">login()</button>
+        </form>
+      </div>
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-        <div ng-controller="FireController">
-          <span ng-bind="welcomeMsg"></span>
-          <form>
-            <input type="email" placeholder="email" ng-model="acc.lgn" />
-            <input type="password" placeholder="password" ng-model="acc.pwd" />
-            <button class="button" ng-click="login(acc)">login()</button>  
-          </form>
-        </div>
-        
-      </ion-content>
-    </ion-pane>
-  </body>
+    </ion-content>
+  </ion-pane>
+
+  <script src="./lib/angular.js"></script>
+  <script src="./lib/angular-animate.js"></script>
+  <script src="./lib/angular-sanitize.js"></script>
+  <script src="./lib/angular-ui-router.js"></script>
+  <script src="./lib/ionic.js"></script>
+  <script src="./lib/ionic-angular.js"></script>
+  <script src="./lib/firebase.js"></script>
+  <script src="./lib/angularfire.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <!-- your app's js -->
+  <script src="./wsp.js"></script>
+  <script src="./app.js"></script>
+</body>
+
 </html>
