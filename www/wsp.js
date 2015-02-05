@@ -1,31 +1,39 @@
-angular.module('starter.wsp', [])
+angular.module('starter.wsp', ['firebase'])
 
-.factory('fireFactory', [function() {
-    return new Firebase("https://amber-torch-6978.firebaseio.com/");
+.factory('fireFactory', ['$firebaseAuth', function($firebaseAuth) {
+    var ref = new Firebase("https://amber-torch-6978.firebaseio.com/");
+    var myAuth = $firebaseAuth(ref);
+
+    return {
+        myAuth: myAuth
+    };
 }])
 
-.controller('FireController', ['$scope', 'fireFactory', function($scope, fireFactory) {
-
-    function authHandler(error, authData) {
-        if (error) {
-            alert("Login Failed!" + angular.toJson(error));
-        }
-        else {
-            alert("login success " + angular.toJson(authData));
-        }
-    }
-
+.controller('FireController', ['$log', '$scope', 'fireFactory', function($log, $scope, fireFactory) {
     $scope.welcomeMsg = 'Welcome';
 
     $scope.acc = {
-        lgn: '',
-        pwd: ''
+        lgn: 'test@example.com',
+        pwd: '123321'
     };
 
+    $scope.authObj = fireFactory.myAuth;
+
     $scope.login = function(tmpAcc) {
-        fireFactory.authWithPassword({
+        $scope.authObj.$authWithPassword({
             email: tmpAcc.lgn,
             password: tmpAcc.pwd
-        }, authHandler);
+        }).then(function(authData) {
+            alert('Logged as ' + angular.toJson(authData));
+            $log.log("Logged in as:", authData);
+        }).catch(function(error) {
+            $log.log("Authentication failed:", error);
+            alert('Auth failed: ' + angular.toJson(error));
+        });
+
+        // fireFactory.authWithPassword({
+        //     email: tmpAcc.lgn,
+        //     password: tmpAcc.pwd
+        // }, authHandler);
     };
 }]);
