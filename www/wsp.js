@@ -1,11 +1,19 @@
 angular.module('starter.wsp', ['firebase'])
 
-.factory('fireFactory', ['$firebaseAuth', function($firebaseAuth) {
+.factory('fireFactory', ['$firebaseAuth', '$firebase', function($firebaseAuth, $firebase) {
     var ref = new Firebase("https://amber-torch-6978.firebaseio.com/");
     var myAuth = $firebaseAuth(ref);
+    
+    var childRef = ref.child('qwer')
+        // Queries can currently only order by one key at a time
+        // https://www.firebase.com/docs/web/api/query/orderbychild.html
+        .orderByChild("body").limitToLast(10);
+
+    var myFire = $firebase(childRef);
 
     return {
-        myAuth: myAuth
+        myAuth: myAuth,
+        myFire: myFire
     };
 }])
 
@@ -35,5 +43,14 @@ angular.module('starter.wsp', ['firebase'])
         //     email: tmpAcc.lgn,
         //     password: tmpAcc.pwd
         // }, authHandler);
+    };
+
+    $scope.orders = fireFactory.myFire.$asArray();
+
+    $scope.addOrder = function() {
+        $scope.orders.$add({
+            from: 'DemoFrom',
+            body: 'order number ' + new Date().getSeconds()
+        });
     };
 }]);

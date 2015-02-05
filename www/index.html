@@ -17,12 +17,38 @@
     </ion-header-bar>
     <ion-content>
       <div ng-controller="FireController">
-        <span ng-bind="welcomeMsg"></span>
-        <form>
-          <input type="email" placeholder="email" ng-model="acc.lgn" />
-          <input type="password" placeholder="password" ng-model="acc.pwd" />
-          <button class="button" ng-click="login(acc)">login()</button>
-        </form>
+
+
+        <div class="card">
+          <div class="item item-divider">
+            <span ng-bind="welcomeMsg"></span>
+          </div>
+          <div class="item item-text-wrap">
+
+            <form>
+              <input type="email" placeholder="email" ng-model="acc.lgn" />
+              <input type="password" placeholder="password" ng-model="acc.pwd" />
+              <button class="button" ng-click="login(acc)">login()</button>
+            </form>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="item item-divider">
+            Orders
+          </div>
+          <div class="item item-text-wrap">
+            <button ng-click="addOrder()">Add demo order</button>
+            <ul>
+              <li ng-repeat='order in orders'>
+                <strong>{{order.from}}</strong> {{order.body}}
+              </li>
+            </ul>
+            <!--<span ng-bind="vwm.msg"></span>-->
+          </div>
+        </div>
+
       </div>
 
     </ion-content>
